@@ -35,11 +35,11 @@ project.ext.versions = [
 
     // https://github.com/NucleoidMC/Server-Translations
     // https://maven.nucleoid.xyz/xyz/nucleoid/server-translations-api
-    server_translations         : '2.0.0-beta.2+1.19.4-pre2',
+    server_translations         : '1.4.18+1.19.2',
 
     // required by server_translations:
     // https://github.com/search?q=repo%3ANucleoidMC%2FServer-Translations+packet+tweaker&type=code
-    packet_tweaker              : '0.4.0+1.19.4',
+    packet_tweaker              : '0.3.0+1.18.2',
 
     // Enables ed25519 support in apache_sshd
     // https://github.com/apache/mina-sshd/blob/dfa109b7b535d64e8ee395ddd0419e7696fb24ee/docs/dependencies.md#ed25519-java
@@ -68,7 +68,7 @@ dependencies {
     include("org.apache.sshd:sshd-common:${versions.apache_sshd}") { transitive = false }
 
     include runtimeOnly("net.i2p.crypto:eddsa:${versions.eddsa}") { transitive = false }
-    include modImplementation("xyz.nucleoid:server-translations-api:${versions.server_translations}") { transitive = false }
+    include modImplementation("fr.catcore:server-translations-api:${versions.server_translations}") { transitive = false }
     include modRuntimeOnly("xyz.nucleoid:packet-tweaker:${versions.packet_tweaker}") { transitive = false }
     include modImplementation("me.lucko:fabric-permissions-api:${versions.fabric_permissions}") { transitive = false }
 

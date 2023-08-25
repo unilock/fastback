@@ -21,9 +21,10 @@ package net.pcal.fastback.mod.fabric;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.MessageScreen;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.pcal.fastback.mod.fabric.mixins.ScreenAccessors;
 
@@ -61,8 +62,8 @@ final class FabricClientProvider extends BaseFabricProvider implements HudRender
     // MixinGateway implementation
 
     @Override
-    public void renderMessageScreen(DrawContext drawContext, float tickDelta) {
-        onHudRender(drawContext, tickDelta);
+    public void renderMessageScreen(MatrixStack matrices, float tickDelta) {
+        onHudRender(matrices, tickDelta);
     }
 
     // ====================================================================
@@ -107,7 +108,7 @@ final class FabricClientProvider extends BaseFabricProvider implements HudRender
     // HudRenderCallback implementation
 
     @Override
-    public void onHudRender(DrawContext drawContext, float tickDelta) {
+    public void onHudRender(MatrixStack matrices, float tickDelta) {
         if (this.hudText == null) return;
         if (!this.client.options.getShowAutosaveIndicator().getValue()) return;
         if (System.currentTimeMillis() - this.hudTextTime > TEXT_TIMEOUT) {
@@ -116,6 +117,6 @@ final class FabricClientProvider extends BaseFabricProvider implements HudRender
             syslog().debug("hud text timed out.  somebody forgot to clean up");
             return;
         }
-        drawContext.drawTextWithShadow(this.client.textRenderer, this.hudText, 2, 2, 1);
+        DrawableHelper.drawTextWithShadow(matrices, this.client.textRenderer, this.hudText, 2, 2, 1);
     }
 }

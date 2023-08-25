@@ -82,7 +82,7 @@ class ModImpl implements LifecycleListener, Mod {
         if (message.style() == ERROR) {
             scs.sendError(messageToText(message));
         } else {
-            scs.sendFeedback(() -> messageToText(message), false);
+            scs.sendFeedback(messageToText(message), false);
         }
     }
 

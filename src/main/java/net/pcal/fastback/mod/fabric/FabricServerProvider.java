@@ -18,7 +18,7 @@
 
 package net.pcal.fastback.mod.fabric;
 
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 
 import java.nio.file.Path;
@@ -54,7 +54,7 @@ public class FabricServerProvider extends BaseFabricProvider {
     }
 
     @Override
-    public void renderMessageScreen(DrawContext drawContext, float tickDelta) {
+    public void renderMessageScreen(MatrixStack matrices, float tickDelta) {
 
     }
 }
