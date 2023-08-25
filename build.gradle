@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.0-SNAPSHOT'
+    id 'fabric-loom' version '1.3-SNAPSHOT'
     id 'maven-publish'
     id "com.modrinth.minotaur" version "2.+"
     id "com.matthewprenger.cursegradle" version "1.4.0"
@@ -7,12 +7,12 @@ plugins {
 
 apply plugin: 'com.matthewprenger.cursegradle'
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
 
 repositories {
     // https://docs.gradle.org/current/userguide/declaring_repositories.html
@@ -38,11 +38,11 @@ project.ext.versions = [
     server_translations         : '2.0.0-beta.2+1.19.4-pre2',
 
     // required by server_translations:
-    // https://github.com/NucleoidMC/Server-Translations/search?q=packet+tweaker
-    packet_tweaker              : '0.3.1+23w06a',
+    // https://github.com/search?q=repo%3ANucleoidMC%2FServer-Translations+packet+tweaker&type=code
+    packet_tweaker              : '0.4.0+1.19.4',
 
     // Enables ed25519 support in apache_sshd
-    // https://github.com/apache/mina-sshd/blob/dfa109b7b535d64e8ee395ddd0419e7696fb24ee/docs/dependencies.md
+    // https://github.com/apache/mina-sshd/blob/dfa109b7b535d64e8ee395ddd0419e7696fb24ee/docs/dependencies.md#ed25519-java
     eddsa                       : '0.3.0',
 
     test_log4j                  : '2.16.0',
@@ -112,11 +112,14 @@ java {
     // if it is present.
     // If you remove this line, sources will not be generated.
     withSourcesJar()
+
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {
     from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}"}
+        rename { "${it}_${project.base.archivesName.get()}"}
     }
 }
 
