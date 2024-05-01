@@ -23,11 +23,11 @@ classes/
 *.iws
 
 # vscode
-
 .settings/
 .vscode/
 .classpath
 .project
+*/bin
 
 # macos
 
