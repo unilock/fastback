@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8.5-GTNH",
+  "package": "net.pcal.fastback.mod.forge.mixins",
+  "refmap": "mixins.fastback.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MinecraftServerAccessor"
+  ],
+  "client": [
+    "client.LoadingScreenRendererAccessor"
+  ]
+}
